@@ -79,10 +79,10 @@ void noMemoryFragmentation(){
     free(asentries);
 }
 
-void writeToFile(){
+void writeToFile(char *fileName){
     const int size = 10;
 
-    FILE *data_file = fopen("file.dat", "w");
+    FILE *data_file = fopen(fileName, "w");
     for ( size_t ix = 0; ix < size; ++ix ){
         for ( size_t jx = 0; jx < size; ++jx ){
             fprintf(data_file, "%ld\t", ix*jx);
@@ -90,15 +90,15 @@ void writeToFile(){
         fprintf(data_file, "\n\n");
     }
     fclose(data_file);
-    printf("\nMatrix data has been stored in file.dat\n");
+    printf("\nMatrix data has been stored in %s\n", fileName);
 }
 
-void readAndCheckFile()
+void readAndCheckFile(char *fileName)
 {
     const int size = 10;
     int isCorrect = 1;
 
-    FILE *data_file = fopen("file.dat", "r");
+    FILE *data_file = fopen(fileName, "r");
     for ( size_t ix = 0; ix < size; ++ix )
     {
         for ( size_t jx = 0; jx < size; ++jx )
@@ -119,11 +119,11 @@ void readAndCheckFile()
     fclose(data_file);
     
     if (isCorrect){
-        printf("\nEach element in the matrix is equal to ix*jx\n");
+        printf("\nEach element in the %s matrix is equal to ix*jx\n", fileName);
     }
     else if (!isCorrect)
     {
-        printf("\nERROR! Each element in the matrix is NOT equal to ix*jx\n");
+        printf("\nERROR! Each element in the %s matrix is NOT equal to ix*jx\n", fileName);
     }
 }
 
@@ -133,6 +133,6 @@ int main(){
     //heapAllocation();
     //memoryFragmentation();
     //noMemoryFragmentation();
-    writeToFile();
-    readAndCheckFile();
+    writeToFile("file.dat");
+    readAndCheckFile("file.dat");
 }
