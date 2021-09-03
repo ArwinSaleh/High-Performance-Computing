@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 
 void stackAllocation(){
 
@@ -12,11 +11,11 @@ void stackAllocation(){
     for other processes.
     */
 
-    int size = pow(10, 7);  // Segmentation fault at 10^7.
-    //int size = pow(10, 6);
+    const int size = 10000000;  // Segmentation fault at 10^7.
     int as[size];   // Stack 
-    for ( size_t ix = 0; ix < size; ++ix )
-    as[ix] = 0;
+    for ( size_t ix = 0; ix < size; ++ix ){
+        as[ix] = 0;
+    }
 
     printf("%d\n", as[0]);
 }
@@ -29,7 +28,7 @@ void heapAllocation(){
     approach is slower.
     */
 
-    int size = pow(10, 7);  // No segmentation fault at 10^7
+    const int size = 10000000;  // No segmentation fault at 10^7
     int * as = (int*) malloc(sizeof(int) * size);   // Heap
     for ( size_t ix = 0; ix < size; ++ix )
     as[ix] = 0;
@@ -43,17 +42,22 @@ void memoryFragmentation(){
     int size = 10;
     
     int ** as = (int**) malloc(sizeof(int*) * size);
-    for ( size_t ix = 0; ix < size; ++ix )
-    as[ix] = (int*) malloc(sizeof(int) * size);
+    for ( size_t ix = 0; ix < size; ++ix ){
+        as[ix] = (int*) malloc(sizeof(int) * size);
+    }
 
-    for ( size_t ix = 0; ix < size; ++ix )
-    for ( size_t jx = 0; jx < size; ++jx )
-        as[ix][jx] = 0;
+    for ( size_t ix = 0; ix < size; ++ix ){
+        for ( size_t jx = 0; jx < size; ++jx ){
+            as[ix][jx] = 0;
+        }
+    }
+    
 
     printf("%d\n", as[0][0]);
 
-    for ( size_t ix = 0; ix < size; ++ix )
+    for ( size_t ix = 0; ix < size; ++ix ){
         free(as[ix]);
+    }   
     free(as);
 }
 
@@ -75,24 +79,10 @@ void noMemoryFragmentation(){
     free(asentries);
 }
 
-void writeToFiles(){
-    FILE *data_file;
-    
-    int size = pow(10, 4);  // Segmentation fault when using stack allocation for size = 10^4.
+void writeToFile(){
+    const int size = 10;
 
-    //int as[size][size];   // Stack 
-
-    // START Heap
-    int * asentries = (int*) malloc(sizeof(int) * size*size);
-    int ** as = (int**) malloc(sizeof(int*) * size);
-    for ( size_t ix = 0, jx = 0; ix < size; ++ix, jx+=size ){
-        as[ix] = asentries + jx;
-    }
-    // END Heap
-
-    
-
-    data_file = fopen("file.data", "w");
+    FILE *data_file = fopen("file.dat", "w");
     for ( size_t ix = 0; ix < size; ++ix ){
         for ( size_t jx = 0; jx < size; ++jx ){
             fprintf(data_file, "%ld\t", ix*jx);
@@ -100,9 +90,41 @@ void writeToFiles(){
         fprintf(data_file, "\n\n");
     }
     fclose(data_file);
+    printf("\nMatrix data has been stored in file.dat\n");
+}
 
-    //free(as);
-    //free(asentries);
+void readAndCheckFile()
+{
+    const int size = 10;
+    int isCorrect = 1;
+
+    FILE *data_file = fopen("file.dat", "r");
+    for ( size_t ix = 0; ix < size; ++ix )
+    {
+        for ( size_t jx = 0; jx < size; ++jx )
+        {
+            size_t currentElement;
+            fscanf(data_file, "%ld", &currentElement);
+            if (currentElement != ix * jx)
+            {
+                isCorrect = 0;
+                break;
+            }
+            if (!isCorrect)
+            {
+                break;
+            }
+        }
+    }
+    fclose(data_file);
+    
+    if (isCorrect){
+        printf("\nEach element in the matrix is equal to ix*jx\n");
+    }
+    else if (!isCorrect)
+    {
+        printf("\nERROR! Each element in the matrix is NOT equal to ix*jx\n");
+    }
 }
 
 int main(){
@@ -111,5 +133,6 @@ int main(){
     //heapAllocation();
     //memoryFragmentation();
     //noMemoryFragmentation();
-    writeToFiles();
+    writeToFile();
+    readAndCheckFile();
 }
