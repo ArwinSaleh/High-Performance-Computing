@@ -47,7 +47,7 @@ int main()
         &cs_im[i]
         );
     }
-    if (runs == benchIter)
+    if (runs == benchIter-1)
     {
         printf("\na_re: %f\na_im: %f\n\n", as_re[size/4], as_im[size/4]);
     }
