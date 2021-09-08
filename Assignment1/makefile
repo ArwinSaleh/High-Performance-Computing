@@ -1,5 +1,5 @@
 .PHONY : all
-all : Assignment1 NaiveBenchmarking test_valgrind test_gdb same_file
+all : Assignment1 NaiveBenchmarking
 
 Assignment1 : Assignment1.c
 	echo "\nBuilding Assignment1\n"
@@ -14,15 +14,3 @@ NaiveBenchmarking : NaiveBenchmarking.c
 	gcc -S -Os NaiveBenchmarking.c -o NaiveBenchmarking_Os.s
 	gcc -S -Og NaiveBenchmarking.c -o NaiveBenchmarking_Og.s
 	gcc -S -O0 -O1 -O2 -Os -Og NaiveBenchmarking.c -o NaiveBenchmarking_ALL.s
-
-test_valgrind : test_valgrind.c
-	echo "\nBuilding test_valgrind\n"
-	gcc -o test_valgrind test_valgrind.c
-
-test_gdb : test_gdb.c
-	echo "\nBuilding test_gdb\n"
-	gcc -o test_gdb test_gdb.c
-
-same_file : same_file.c
-	echo "\nBuilding same_file\n"
-	gcc -o same_file same_file.c
