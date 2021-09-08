@@ -11,7 +11,7 @@ int main()
     {
         sum += i;
     }
-    clock_t end = clock();
+ #include <stdlib.h>   clock_t end = clock();
     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 
     printf("The sum is %lu for size %lu \nand the time it took is %f seconds\n", sum, size, time_spent);

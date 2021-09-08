@@ -10,5 +10,5 @@ printargs : printargs.c
 	gcc -o printargs printargs.c
 
 NaiveBenchmarking : NaiveBenchmarking.c
-	echo "\nBuilding NaiveBenchmarking\n"
-	gcc -o NaiveBenchmarking NaiveBenchmarking.c -O0 -O1 -O2 -O3 -Os -Og
+        echo "\nBuilding NaiveBenchmarking\n"
+        gcc -o NaiveBenchmarking NaiveBenchmarking.c -O0 -O1 -O2 -O3 -Os -Og
