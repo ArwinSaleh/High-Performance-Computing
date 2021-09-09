@@ -1,19 +1,17 @@
 #include "helper_functions.h"
-#include "different_file_mul.h"
+
+void mul_cpx
+(
+    double *a_re;
+    double *a_im;
+    double *b_re;
+    double *b_im;
+    double *c_re;
+    double *c_im;
+);
 
 int main()
 {
-    /*
-    const int size = 100000000;
-
-    double * as_re = (double*) malloc(sizeof(double) * size);
-    double * as_im = (double*) malloc(sizeof(double) * size);
-    double * bs_re = (double*) malloc(sizeof(double) * size);
-    double * bs_im = (double*) malloc(sizeof(double) * size);
-    double * cs_re = (double*) malloc(sizeof(double) * size);
-    double * cs_im = (double*) malloc(sizeof(double) * size);
-    */
-
    const int benchIter = 1000000;
 
    for (int runs = 0; runs < benchIter; runs++)
@@ -49,7 +47,7 @@ int main()
     }
     if (runs == benchIter-1)
     {
-        printf("\na_re: %f\na_im: %f\n\n", as_re[size/4], as_im[size/4]);
+        printf("\na_re: %f\na_im: %f\n\n", as_re[irand(0, size)], as_im[irand(0, size)]);
     }
    }
 }

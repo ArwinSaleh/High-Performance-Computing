@@ -58,7 +58,7 @@ int main()
     }
     if (runs == benchIter-1)
     {
-        printf("\na_re: %f\na_im: %f\n\n", as_re[size/4], as_im[size/4]);
+        printf("\na_re: %f\na_im: %f\n\n", as_re[irand(0, size)], as_im[irand(0, size)]);
     }
    }
 }

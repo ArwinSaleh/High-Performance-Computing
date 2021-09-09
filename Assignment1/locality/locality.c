@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include "helper_functions.h"
 
-void row_sums(
+void compute_row_sums
+(
   double * sums,
   const double ** matrix,
   size_t nrs,
@@ -17,7 +18,8 @@ void row_sums(
   }
 }
 
-void col_sums(
+void compute_col_sums
+(
   double * sums,
   const double ** matrix,
   size_t nrs,
@@ -34,7 +36,7 @@ void col_sums(
 
 int main()
 {
-    int size = 10;
+    int size = 1000;
 
     double * asentries = (double*) malloc(sizeof(double) * size*size);
     double ** as = (double**) malloc(sizeof(double*) * size);
@@ -43,12 +45,16 @@ int main()
 
     for ( size_t ix = 0; ix < size; ++ix )
     for ( size_t jx = 0; jx < size; ++jx )
-        as[ix][jx] = rand_double();
+        as[ix][jx] = drand();
+        
+    double * row_sums;
+    double * col_sums;
 
-    printf("%f", as[4][10]);
-
+    compute_row_sums(&row_sums, as, size, size);
+    compute_col_sums(&col_sums, as, size, size);
     
-
     free(as);
     free(asentries);
+
+    printf("row sum0: %f \ncol sum0: %f", row_sums[0], col_sums[0]);
 }

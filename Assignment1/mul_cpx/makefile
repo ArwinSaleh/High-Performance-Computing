@@ -7,7 +7,7 @@ same_file : same_file.c helper_functions.h
 
 different_file : different_file.c helper_functions.h
 	echo "\nBuilding different_file\n"
-	gcc -o different_file different_file.c -O2
+	gcc -o different_file different_file.c different_file_mul.c -O2
 
 inlined_manually : inlined_manually.c helper_functions.h
 	echo "\nBuilding different_file\n"
