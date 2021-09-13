@@ -36,25 +36,58 @@ void compute_col_sums
 
 int main()
 {
-    int size = 1000;
+  const size_t benchIter = 5000;
+  const size_t size = 1000;
 
-    double * asentries = (double*) malloc(sizeof(double) * size*size);
-    double ** as = (double**) malloc(sizeof(double*) * size);
-    for ( size_t ix = 0, jx = 0; ix < size; ++ix, jx+=size )
+  double * asentries = (double*) malloc(sizeof(double) * size*size);
+  double ** as = (double**) malloc(sizeof(double*) * size);
+  for ( size_t ix = 0, jx = 0; ix < size; ++ix, jx+=size )
+  {
     as[ix] = asentries + jx;
+  }
+
+  double entry = 0;
+  for ( size_t ix = 0; ix < size; ++ix )
+  {
+    for ( size_t jx = 0; jx < size; ++jx )
+    {
+      as[ix][jx] = entry;
+      entry += 0.1;
+    } 
+  }
+
+  for (size_t runs = 0; runs < benchIter; runs++)
+  {
+    double * row_sums = (double*) malloc(sizeof(double) * size);
+    double * col_sums = (double*) malloc(sizeof(double) * size);
 
     for ( size_t ix = 0; ix < size; ++ix )
-    for ( size_t jx = 0; jx < size; ++jx )
-        as[ix][jx] = drand();
-        
-    double * row_sums;
-    double * col_sums;
+    {
+      double sum = 0.;    
+      for ( size_t jx = 0; jx < size; ++jx )
+      {
+        sum += as[ix][jx];
+      }
+      row_sums[ix] = sum;
+    }
 
-    compute_row_sums(&row_sums, as, size, size);
-    compute_col_sums(&col_sums, as, size, size);
+    for ( size_t jx = 0; jx < size; ++jx ) 
+    {
+      double sum = 0.;
+      for ( size_t ix = 0; ix < size; ++ix )
+      {
+        sum += as[ix][jx];
+      }
+      col_sums[jx] = sum;
+    }
+
     
     free(as);
     free(asentries);
 
-    printf("row sum0: %f \ncol sum0: %f", row_sums[0], col_sums[0]);
+    if (runs == benchIter-1)
+    {
+      printf("row sum0: %f \ncol sum0: %f\n", row_sums[0], col_sums[0]);;
+    }
+  }
 }

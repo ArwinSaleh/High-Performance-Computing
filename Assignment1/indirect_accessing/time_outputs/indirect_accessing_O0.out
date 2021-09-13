@@ -1,0 +1,16 @@
+arwinsaleh@UX430UNR-eb01191e:~/Documents/git/High-Performance-Computing/Assignment1/indirect_accessing$ time ./indirect_accessing 1
+
+4.200939
+
+real	0m14.255s
+user	0m8.377s
+sys	0m5.877s
+
+
+arwinsaleh@UX430UNR-eb01191e:~/Documents/git/High-Performance-Computing/Assignment1/indirect_accessing$ time ./indirect_accessing 2
+
+4.200939
+
+real	0m24.374s
+user	0m18.021s
+sys	0m6.353s
