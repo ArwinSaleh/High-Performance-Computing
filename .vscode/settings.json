@@ -2,5 +2,6 @@
     "files.associations": {
         "helperfunctions.h": "c",
         "same_file.h": "c"
-    }
+    },
+    "ros.distro": "noetic"
 }

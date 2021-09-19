@@ -1,0 +1,16 @@
+time ./indirect_accessing 1
+
+1.729609
+
+real	0m19.933s
+user	0m11.767s
+sys	0m8.163s
+
+
+time ./indirect_accessing 2
+
+1.729609
+
+real	0m29.821s
+user	0m21.519s
+sys	0m8.298s
