@@ -12,7 +12,7 @@ void writeToFile(char *fileName){
     FILE *data_file = fopen(fileName, "w");
     fwrite(big_array, size*sizeof(size_t), 2, data_file);
     fclose(data_file);
-    printf("\nMatrix data has been stored in %s\n", fileName);
+    //printf("\nMatrix data has been stored in %s\n", fileName);
     free(big_array);
 }
 
@@ -31,7 +31,7 @@ void readAndCheckFile(char *fileName)
 
     fread(buffer, 1, lSize, data_file);
 
-    printf("\n%lu\n", buffer[1048575]);
+    //printf("\n%lu\n", buffer[1048575]);
 
     fclose(data_file);
     free(buffer);
@@ -39,7 +39,11 @@ void readAndCheckFile(char *fileName)
 
 int main(){
 
+    for (int bench_iter = 0; bench_iter < 1000; bench_iter++)
+    {
+
     writeToFile("file.dat");
     readAndCheckFile("file.dat");
 
+    }
 }
