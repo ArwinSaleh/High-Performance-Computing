@@ -3,7 +3,7 @@
 
 
 void writeToFile(char *fileName){
-    const int size = 10;
+    const size_t size = 1048576;
 
     FILE *data_file = fopen(fileName, "w");
     for ( size_t ix = 0; ix < size; ++ix ){
@@ -16,8 +16,8 @@ void writeToFile(char *fileName){
 
 void readAndCheckFile(char *fileName)
 {
-    const int size = ;
-    size_t * big_array = (size_t*) malloc(sizeof(size_t) * lSize + 1);
+    const size_t size = 1048576;
+    size_t * big_array = (size_t*) malloc(sizeof(size_t) * size);
 
     FILE *data_file = fopen(fileName, "r");
     for ( size_t ix = 0; ix < size; ++ix )
