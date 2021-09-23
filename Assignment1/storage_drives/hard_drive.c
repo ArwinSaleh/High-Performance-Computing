@@ -2,9 +2,11 @@
 #include <stdlib.h>
 
 void writeToFile(char *fileName){
-    const int size = 1048576;
-
+    printf("TEST1");
+    const size_t size = 1048576;
+    printf("TEST2");
     size_t * big_array = (size_t*) malloc(sizeof(size_t) * size*size);
+    printf("TEST3");
     for ( size_t ix = 0; ix < size; ++ix ){
         big_array[ix] = ix;
     }
@@ -13,6 +15,7 @@ void writeToFile(char *fileName){
     fwrite (big_array , sizeof(size_t), sizeof(big_array), data_file);
     fclose(data_file);
     printf("\nMatrix data has been stored in %s\n", fileName);
+    free(big_array);
 }
 
 void readAndCheckFile(char *fileName)
@@ -39,7 +42,7 @@ void readAndCheckFile(char *fileName)
         }
     }
     fclose(data_file);
-    
+
     if (isCorrect){
         printf("\nEach element in the %s matrix is equal to ix*jx\n", fileName);
     }
@@ -50,7 +53,7 @@ void readAndCheckFile(char *fileName)
 }
 
 int main(){
-
+    printf("TEST");
     writeToFile("file.dat");
     //readAndCheckFile("file.dat");
 
