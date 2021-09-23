@@ -9,7 +9,7 @@ void writeToFile(char *fileName){
     }
 
     FILE *data_file = fopen(fileName, "w");
-    fwrite (big_array , sizeof(size_t), sizeof(big_array), data_file);
+    fwrite(big_array , sizeof(size_t), sizeof(big_array), data_file);
     fclose(data_file);
     printf("\nMatrix data has been stored in %s\n", fileName);
     free(big_array);
@@ -17,41 +17,27 @@ void writeToFile(char *fileName){
 
 void readAndCheckFile(char *fileName)
 {
-    const int size = 10;
-    int isCorrect = 1;
+    const size_t size = 1048576;
+    size_t * big_array = (size_t*) malloc(sizeof(size_t) * size);
+    if (big_array == NULL) {fputs ("Memory error",stderr); exit (2);}
+    size_t result;
 
-    FILE *data_file = fopen(fileName, "r");
-    for ( size_t ix = 0; ix < size; ++ix )
-    {
-        for ( size_t jx = 0; jx < size; ++jx )
-        {
-            size_t currentElement;
-            fscanf(data_file, "%ld", &currentElement);
-            if (currentElement != ix * jx)
-            {
-                isCorrect = 0;
-                break;
-            }
-            if (!isCorrect)
-            {
-                break;
-            }
-        }
-    }
+    FILE *data_file = fopen(fileName, "rb");
+
+    fread(big_array , sizeof(size_t), sizeof(big_array), data_file);
+
+    // copy the file into the buffer:
+    result = fread(big_array, 1, size, data_file);
+    if (result != size) {fputs ("Reading error",stderr); exit (3);}
+    printf("\nMatrix data has been stored in %s\n", fileName);
+
     fclose(data_file);
-
-    if (isCorrect){
-        printf("\nEach element in the %s matrix is equal to ix*jx\n", fileName);
-    }
-    else if (!isCorrect)
-    {
-        printf("\nERROR! Each element in the %s matrix is NOT equal to ix*jx\n", fileName);
-    }
+    free(big_array);
 }
 
 int main(){
-    printf("TEST");
+    
     writeToFile("file.dat");
-    //readAndCheckFile("file.dat");
+    readAndCheckFile("file.dat");
 
 }
