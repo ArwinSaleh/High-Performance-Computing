@@ -1,5 +1,9 @@
 time ./same_file 
 
-real	19m32.229s
-user	19m32.043s
-sys	0m0.036s
+a_re: 12.460604
+a_im: 63.166748
+
+
+real	12m5.033s
+user	12m4.672s
+sys	0m0.072s

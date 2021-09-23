@@ -1,5 +1,9 @@
 time ./different_file 
 
-real	17m41.942s
-user	17m41.801s
-sys	0m0.016s
+a_re: 12.460604
+a_im: 63.166748
+
+
+real	13m5.689s
+user	13m5.312s
+sys	0m0.100s

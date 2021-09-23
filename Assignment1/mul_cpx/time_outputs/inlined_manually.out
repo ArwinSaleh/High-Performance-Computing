@@ -1,5 +1,9 @@
 time ./inlined_manually 
 
-real	16m17.320s
-user	16m17.186s
-sys	0m0.024s
+a_re: 12.460604
+a_im: 63.166748
+
+
+real	12m0.630s
+user	12m0.299s
+sys	0m0.068s
