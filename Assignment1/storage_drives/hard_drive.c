@@ -2,15 +2,15 @@
 #include <stdlib.h>
 
 void writeToFile(char *fileName){
-    const int size = 1048576;
-    int * big_array = (int*) malloc(sizeof(int) * size);
+    const size_t size = 1048576;
+    size_t * big_array = (size_t*) malloc(sizeof(size_t) * size);
     if (big_array == NULL) {fputs ("Memory error in WRITE",stderr); exit (2);}
-    for ( int ix = 0; ix < size; ++ix ){
+    for ( size_t ix = 0; ix < size; ++ix ){
         big_array[ix] = ix;
     }
 
     FILE *data_file = fopen(fileName, "w");
-    fwrite(big_array, size*sizeof(int), 2, data_file);
+    fwrite(big_array, size*sizeof(size_t), 2, data_file);
     fclose(data_file);
     printf("\nMatrix data has been stored in %s\n", fileName);
     free(big_array);
@@ -26,7 +26,7 @@ void readAndCheckFile(char *fileName)
     lSize = ftell(data_file);  // get the current file pointer 
     rewind(data_file);  // rewind to the beginning of the file
 
-    int * buffer = (int*) malloc(sizeof(int) * lSize + 1);
+    size_t * buffer = (size_t*) malloc(sizeof(size_t) * lSize + 1);
     if (buffer == NULL) {fputs ("Memory error",stderr); exit (2);}
 
     fread(buffer, 1, lSize, data_file);
