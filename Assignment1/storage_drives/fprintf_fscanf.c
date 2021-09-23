@@ -16,12 +16,12 @@ void writeToFile(char *fileName){
 
 void readAndCheckFile(char *fileName)
 {
-    const int size = 10;
+    const int size = ;
+    size_t * big_array = (size_t*) malloc(sizeof(size_t) * lSize + 1);
 
     FILE *data_file = fopen(fileName, "r");
     for ( size_t ix = 0; ix < size; ++ix )
     {
-        size_t * big_array = (size_t*) malloc(sizeof(size_t) * lSize + 1);
         fscanf(data_file, "%ld", &big_array[ix]);
     }
     fclose(data_file);

@@ -1,5 +1,5 @@
 .PHONY : all
-all : fwrite_fread
+all : fwrite_fread fprintf_fscanf
 
 fwrite_fread : fwrite_fread.c
 	echo "\nBuilding fwrite_fread\n"
