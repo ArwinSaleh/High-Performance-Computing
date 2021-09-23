@@ -2,11 +2,8 @@
 #include <stdlib.h>
 
 void writeToFile(char *fileName){
-    printf("TEST1");
     const size_t size = 1048576;
-    printf("TEST2");
-    size_t * big_array = (size_t*) malloc(sizeof(size_t) * size*size);
-    printf("TEST3");
+    size_t * big_array = (size_t*) malloc(sizeof(size_t) * size);
     for ( size_t ix = 0; ix < size; ++ix ){
         big_array[ix] = ix;
     }
