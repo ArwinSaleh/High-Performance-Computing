@@ -2,15 +2,15 @@
 #include <stdlib.h>
 
 void writeToFile(char *fileName){
-    const int size = 10;
+    const int size = 1048576;
+
+    size_t * big_array = (size_t*) malloc(sizeof(size_t) * size*size);
+    for ( size_t ix = 0; ix < size; ++ix ){
+        big_array[ix] = ix;
+    }
 
     FILE *data_file = fopen(fileName, "w");
-    for ( size_t ix = 0; ix < size; ++ix ){
-        for ( size_t jx = 0; jx < size; ++jx ){
-            fprintf(data_file, "%ld\t", ix*jx);
-        }
-        fprintf(data_file, "\n\n");
-    }
+    fwrite (big_array , sizeof(size_t), sizeof(big_array), data_file);
     fclose(data_file);
     printf("\nMatrix data has been stored in %s\n", fileName);
 }
@@ -52,6 +52,6 @@ void readAndCheckFile(char *fileName)
 int main(){
 
     writeToFile("file.dat");
-    readAndCheckFile("file.dat");
+    //readAndCheckFile("file.dat");
 
 }
