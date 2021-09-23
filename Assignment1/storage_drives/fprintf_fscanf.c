@@ -11,7 +11,7 @@ void writeToFile(char *fileName){
         fprintf(data_file, "\n\n");
     }
     fclose(data_file);
-    printf("\nMatrix data has been stored in %s\n", fileName);
+    //printf("\nMatrix data has been stored in %s\n", fileName);
 }
 
 void readAndCheckFile(char *fileName)
@@ -25,11 +25,14 @@ void readAndCheckFile(char *fileName)
         fscanf(data_file, "%ld", &big_array[ix]);
     }
     fclose(data_file);
+    //printf("\n%lu\n", big_array[1048575]);
     free(big_array);
 }
 
 int main(){
-
-    writeToFile("file.dat");
-    readAndCheckFile("file.dat");
+    for(int bench_iter = 0; bench_iter = 1000; bench_iter++)
+    {
+        writeToFile("file.dat");
+        readAndCheckFile("file.dat");
+    }
 }
