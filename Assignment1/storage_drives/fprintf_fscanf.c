@@ -30,7 +30,7 @@ void readAndCheckFile(char *fileName)
 }
 
 int main(){
-    for(int bench_iter = 0; bench_iter = 1000; bench_iter++)
+    for(int bench_iter = 0; bench_iter = 1; bench_iter++)
     {
         writeToFile("file.dat");
         readAndCheckFile("file.dat");
