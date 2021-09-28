@@ -1,7 +1,9 @@
 {
     "files.associations": {
         "helperfunctions.h": "c",
-        "same_file.h": "c"
+        "same_file.h": "c",
+        "type_traits": "c",
+        "cmath": "c"
     },
     "ros.distro": "noetic"
 }
