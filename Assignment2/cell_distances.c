@@ -123,9 +123,9 @@ int main(int argc, char *argv[]){
             int y_jx = cells[jx][1];
             int z_jx = cells[jx][2];
 
-            //distances[distance_counter] = round(    sqrt(   (x_ix - x_jx) * (x_ix - x_jx) + 
-            //                                                (y_ix - y_jx) * (y_ix - y_jx) + 
-            //                                                (z_ix - z_jx) * (z_ix - z_jx)   )   );
+            distances[distance_counter] = round(    sqrt(   (x_ix - x_jx) * (x_ix - x_jx) + 
+                                                            (y_ix - y_jx) * (y_ix - y_jx) + 
+                                                            (z_ix - z_jx) * (z_ix - z_jx)   )   );
 
             //printf("\nDISTANCE %d = %f\n", distance_counter+1, distances[distance_counter]);
 

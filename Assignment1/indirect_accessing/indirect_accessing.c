@@ -13,13 +13,12 @@ int main(int argc, char *argv[])
     const double a = 3.;
     const size_t size = 1000000;
     const size_t benchIter = 1000;
-    
+
+    double * y = (double*) malloc(sizeof(double) * size);
+    double * p = (double*) malloc(sizeof(double) * size);
+    double * x = (double*) malloc(sizeof(double) * size);
     for (size_t runs = 0; runs < benchIter; runs++)
     {
-        double * y = (double*) malloc(sizeof(double) * size);
-        double * p = (double*) malloc(sizeof(double) * size);
-
-        double * x = (double*) malloc(sizeof(double) * size);
         for (size_t i = 0; i < size; i++)
         {
             x[i] = rand_double(0, 10);
@@ -53,8 +52,8 @@ int main(int argc, char *argv[])
         {
             printf("\n%f\n", y[0]);
         }
+    }
         free(y);
         free(p);
         free(x);
-    }
 }
