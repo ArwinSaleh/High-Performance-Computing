@@ -3,7 +3,9 @@
         "helperfunctions.h": "c",
         "same_file.h": "c",
         "type_traits": "c",
-        "cmath": "c"
+        "cmath": "c",
+        "stdio.h": "c",
+        "stdint.h": "c"
     },
     "ros.distro": "noetic"
 }
