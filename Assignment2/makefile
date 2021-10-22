@@ -1,10 +1,6 @@
 .PHONY : all
-all : assignment2 test
+all : cell_distances
 
-assignment2 : assignment2.c
-	echo "\nBuilding assignment2\n"
-	gcc -o assignment2 assignment2.c -lm -O2
-
-test : test.c
-	echo "\nBuilding test\n"
-	gcc -o test test.c -lm -O2
+cell_distances : cell_distances.c
+	echo "\nBuilding cell_distances\n"
+	gcc -o cell_distances cell_distances.c -fopenmp -O2
