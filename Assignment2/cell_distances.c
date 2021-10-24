@@ -170,7 +170,7 @@ for MAX_CHUNK_SIZE = 100000.
                 float squared = delta_x * delta_x + delta_y * delta_y + delta_z * delta_z;
                 float distance = fast_sqrtf(squared);
                 int distance_index = 100 * (distance + 0.005);
-		distances[distance_index]++;
+                distances[distance_index]++;
             }
         }
         while ((chunk_size2 = read_chunk(data_file, chunk2)) > 0)
