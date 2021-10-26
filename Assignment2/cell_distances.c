@@ -2,29 +2,11 @@
 #include <omp.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <math.h>
 
 #define MAX_CHUNK_SIZE  100000
 #define CHARS_PER_LINE  24
-#define FILE_NAME       "cells"
-
-static inline float fast_sqrtf(float x) {
-/*
-Babylonian method used for calculating
-square root of float quickly.
-Brought from: https://github.com/unia-sik/emsbench/blob/master/embedded/tg/sqrtf.c
-*/
-  union {
-    int i;
-    float x;
-  } u;
-  u.x = x;
-  u.i = (1<<29) + (u.i >> 1) - (1 << 22);
-
-  u.x = u.x + x/u.x;
-  u.x = 0.25f*u.x + x/u.x;
-
-  return u.x;
-}
+#define FILE_NAME       "cell_e5"
 
 static inline void parse_line(char * buffer, float ** cells_chunk, size_t loaded_cells)
 {
@@ -168,7 +150,7 @@ for MAX_CHUNK_SIZE = 100000.
                 float delta_y = chunk1[ix][1] - chunk1[jx][1];
                 float delta_z = chunk1[ix][2] - chunk1[jx][2];
                 float squared = delta_x * delta_x + delta_y * delta_y + delta_z * delta_z;
-                float distance = fast_sqrtf(squared);
+                float distance = sqrtf(squared);
                 int distance_index = 100 * (distance + 0.005);
                 distances[distance_index]++;
             }
@@ -184,7 +166,7 @@ for MAX_CHUNK_SIZE = 100000.
                     float delta_y = chunk1[iy][1] - chunk2[jy][1];
                     float delta_z = chunk1[iy][2] - chunk2[jy][2];
                     float squared = delta_x * delta_x + delta_y * delta_y + delta_z * delta_z;
-                    float distance = fast_sqrtf(squared);
+                    float distance = sqrtf(squared);
                     int distance_index = 100 * (distance + 0.005);
                     distances[distance_index]++;
                 }

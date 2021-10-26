@@ -2,29 +2,11 @@
 #include <omp.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <math.h>
 
 #define MAX_CHUNK_SIZE  100000
 #define CHARS_PER_LINE  24
 #define FILE_NAME       "cell_e5"
-
-static inline float fast_sqrtf(float x) {
-/*
-Babylonian method used for calculating
-square root of float quickly.
-Brought from: https://github.com/unia-sik/emsbench/blob/master/embedded/tg/sqrtf.c
-*/
-  union {
-    int i;
-    float x;
-  } u;
-  u.x = x;
-  u.i = (1<<29) + (u.i >> 1) - (1 << 22);
-
-  u.x = u.x + x/u.x;
-  u.x = 0.25f*u.x + x/u.x;
-
-  return u.x;
-}
 
 static inline void parse_line(char * buffer, float ** cells_chunk, size_t loaded_cells)
 {
@@ -144,6 +126,7 @@ Running
 shows us that this program uses 4,029,520 bytes
 for MAX_CHUNK_SIZE = 100000.
 */
+/*
     float * chunk1_entries = (float*) malloc(sizeof(float) * MAX_CHUNK_SIZE*3);
     float ** chunk1 = (float**) malloc(sizeof(float*) * MAX_CHUNK_SIZE);
     float * chunk2_entries = (float*) malloc(sizeof(float) * MAX_CHUNK_SIZE*3);
@@ -153,6 +136,14 @@ for MAX_CHUNK_SIZE = 100000.
     {
         chunk1[ix] = chunk1_entries + jx;
         chunk2[ix] = chunk2_entries + jx;
+    }
+*/
+    float ** chunk1 = (float**) malloc(sizeof(float*) * MAX_CHUNK_SIZE);
+    float ** chunk2 = (float**) malloc(sizeof(float*) * MAX_CHUNK_SIZE);
+
+    for ( size_t ix = 0; ix < MAX_CHUNK_SIZE; ++ix ){
+        chunk1[ix] = (float*) malloc(sizeof(int) * 3);
+        chunk2[ix] = (float*) malloc(sizeof(int) * 3);
     }
 
     size_t chunk_size1, chunk_size2;
@@ -168,7 +159,7 @@ for MAX_CHUNK_SIZE = 100000.
                 float delta_y = chunk1[ix][1] - chunk1[jx][1];
                 float delta_z = chunk1[ix][2] - chunk1[jx][2];
                 float squared = delta_x * delta_x + delta_y * delta_y + delta_z * delta_z;
-                float distance = fast_sqrtf(squared);
+                float distance = sqrtf(squared);
                 int distance_index = 100 * (distance + 0.005);
                 distances[distance_index]++;
             }
@@ -184,7 +175,7 @@ for MAX_CHUNK_SIZE = 100000.
                     float delta_y = chunk1[iy][1] - chunk2[jy][1];
                     float delta_z = chunk1[iy][2] - chunk2[jy][2];
                     float squared = delta_x * delta_x + delta_y * delta_y + delta_z * delta_z;
-                    float distance = fast_sqrtf(squared);
+                    float distance = sqrtf(squared);
                     int distance_index = 100 * (distance + 0.005);
                     distances[distance_index]++;
                 }
@@ -194,10 +185,12 @@ for MAX_CHUNK_SIZE = 100000.
 	read_index++;
     }
     fclose(data_file);
-
-    free(chunk1_entries);
+    
+    for ( size_t ix = 0; ix < MAX_CHUNK_SIZE; ++ix ){
+        free(chunk1[ix]);
+        free(chunk2[ix]);
+    }
     free(chunk1);
-    free(chunk2_entries);
     free(chunk2);
 
     for (int i = 0; i <= n_unique_distances; i++)
