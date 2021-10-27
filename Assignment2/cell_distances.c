@@ -151,7 +151,7 @@ for MAX_CHUNK_SIZE = 100000.
                 float delta_z = chunk1[ix][2] - chunk1[jx][2];
                 float squared = delta_x * delta_x + delta_y * delta_y + delta_z * delta_z;
                 float distance = sqrtf(squared);
-                int distance_index = 100 * (distance + 0.005);
+                int distance_index = 100.0f * (distance + 0.005f);
                 distances[distance_index]++;
             }
         }
@@ -167,7 +167,7 @@ for MAX_CHUNK_SIZE = 100000.
                     float delta_z = chunk1[iy][2] - chunk2[jy][2];
                     float squared = delta_x * delta_x + delta_y * delta_y + delta_z * delta_z;
                     float distance = sqrtf(squared);
-                    int distance_index = 100 * (distance + 0.005);
+                    int distance_index = 100.0f * (distance + 0.005f);
                     distances[distance_index]++;
                 }
             }
